@@ -1,0 +1,42 @@
+.recipe-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.mat-card-title {
+  font-size: 1.4em;
+}
+
+.mat-card-subtitle {
+  font-size: 1.2em;
+}
+
+.recipe-img {
+  height: 150px;
+  width: 200px;
+  vertical-align: text-top;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.mat-card-content {
+  display: flex;
+}
+
+.recipe-header-icons {
+  margin-left: auto;
+}
+
+.recipe-description {
+  font-size: 1.5em;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.recipe-detail-icon {
+  padding: 0 5px;
+  mat-icon {
+    vertical-align:middle;
+    margin: 5px;
+  }
+}

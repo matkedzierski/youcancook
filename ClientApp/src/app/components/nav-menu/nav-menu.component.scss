@@ -1,0 +1,54 @@
+.toolbar {
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 0 5px;
+    margin: 0 5px 0 3px;
+  }
+  a:first-child {
+    margin-left: 0;
+  }
+  a:last-child {
+    margin-right: 0;
+  }
+  padding: 0 10%;
+
+  .nav-link{
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+}
+
+.toolbar a.toolbar-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.spacer {
+  margin: auto;
+}
+
+.user-pic {
+  max-width: 32px;
+  max-height: 32px;
+  vertical-align: middle;
+  border-radius: 15px;
+  margin-right: 5px;
+}
+
+.mat-icon {
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+.mat-divider {
+  height: 25px;
+  background: lightgray;
+  box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+}
+
+.logo {
+  max-height: 53px;
+  vertical-align: middle;
+  padding-bottom: 4px;
+}

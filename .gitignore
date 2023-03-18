@@ -3,3 +3,6 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+.firebase
+.idea
+ClientApp/package-lock.json

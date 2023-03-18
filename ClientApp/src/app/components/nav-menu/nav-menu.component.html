@@ -1,0 +1,59 @@
+﻿<mat-toolbar color="primary" class="toolbar">
+  <a href="/" class="toolbar-title">
+    <img src="assets/img/logo_transparent.png" class="logo"/>
+    YouCanCook
+  </a>
+  <a class="nav-link" href="">
+    <mat-icon>home</mat-icon>
+    Główna
+  </a>
+  <mat-divider vertical="true"></mat-divider>
+  <a class="nav-link" href="">
+    <mat-icon>search</mat-icon>
+    Wyszukaj
+  </a>
+  <mat-divider vertical="true"></mat-divider>
+  <ng-container *ngIf="auth.isAuthenticated$ | async">
+    <a class="nav-link" href="">
+      <mat-icon>star</mat-icon>
+      Ulubione
+    </a>
+    <mat-divider vertical="true"></mat-divider>
+
+    <a class="nav-link" href="">
+      <mat-icon>add</mat-icon>
+      Dodaj przepis
+    </a>
+    <mat-divider vertical="true"></mat-divider>
+
+  </ng-container>
+
+  <a class="nav-link" href="">
+    <mat-icon>info_outline</mat-icon>
+    O projekcie
+  </a>
+  <mat-divider vertical="true"></mat-divider>
+
+  <a class="nav-link" href="">
+    <mat-icon>question_answer</mat-icon>
+    Kontakt
+  </a>
+
+  <span class="spacer"></span>
+  <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+    <a class="nav-link profile-link" *ngIf="auth.user$ | async as user">
+      <img [src]="user.picture" class="user-pic"/>
+      {{ user.name }}
+    </a>
+    <mat-divider vertical="true"></mat-divider>
+
+    <a class="nav-link" (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
+      Wyloguj się
+    </a>
+
+  </ng-container>
+
+  <ng-template #loggedOut>
+    <a class="nav-link" (click)="auth.loginWithRedirect()">Zaloguj się</a>
+  </ng-template>
+</mat-toolbar>
