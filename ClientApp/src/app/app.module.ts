@@ -33,7 +33,7 @@ import {MatDividerModule} from "@angular/material/divider";
     FormsModule,
     AuthModule.forRoot({
       domain: 'youcookit.eu.auth0.com',
-      clientId: 'iXZ8fuzuuA2nULaZhStIb99GRAeklZak',
+      clientId: 'spieE5Jl78sHu9zwMlzZDC00fksUUnTv',
       authorizationParams: {
         redirect_uri: window.location.origin
       }
