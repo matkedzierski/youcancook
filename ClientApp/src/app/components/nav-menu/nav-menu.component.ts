@@ -9,13 +9,4 @@ import {DOCUMENT} from "@angular/common";
 })
 export class NavMenuComponent {
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
-  isExpanded = false;
-
-  collapse() {
-    this.isExpanded = false;
-  }
-
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
 }

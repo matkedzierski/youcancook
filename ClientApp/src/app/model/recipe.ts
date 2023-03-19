@@ -2,6 +2,7 @@
 import {Difficulty} from "./difficulty.enum";
 
 export class Recipe {
+  id?: string;
   title?: string;
   category?: Category;
   difficulty?: Difficulty;

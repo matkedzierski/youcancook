@@ -15,7 +15,16 @@ import {NavMenuComponent} from "./components/nav-menu/nav-menu.component";
 import {RecipeListItemComponent} from "./components/recipe-list-item/recipe-list-item.component";
 import {AuthModule} from "@auth0/auth0-angular";
 import {MatDividerModule} from "@angular/material/divider";
-import {AboutComponent} from "./pages/counter/about.component";
+import {AboutComponent} from "./pages/about/about.component";
+import { SupportComponent } from './pages/support/support.component';
+import { FavouriteComponent } from './pages/favourite/favourite.component';
+import { AddComponent } from './pages/add/add.component';
+import { MyComponent } from './pages/my/my.component';
+import { LevelBadgeComponent } from './components/recipe-list-item/level-badge/level-badge.component';
+import {MatChipsModule} from "@angular/material/chips";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -23,7 +32,12 @@ import {AboutComponent} from "./pages/counter/about.component";
     NavMenuComponent,
     HomeComponent,
     AboutComponent,
-    RecipeListItemComponent
+    RecipeListItemComponent,
+    SupportComponent,
+    FavouriteComponent,
+    AddComponent,
+    MyComponent,
+    LevelBadgeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -38,14 +52,22 @@ import {AboutComponent} from "./pages/counter/about.component";
     }),
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'favourite', component: FavouriteComponent},
+      {path: 'add', component: AddComponent},
+      {path: 'my', component: MyComponent},
       {path: 'about', component: AboutComponent},
+      {path: 'support', component: SupportComponent},
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
   ],
