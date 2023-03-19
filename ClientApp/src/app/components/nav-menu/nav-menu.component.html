@@ -1,40 +1,48 @@
 ﻿<mat-toolbar color="primary" class="toolbar">
-  <a href="/" class="toolbar-title">
-    <img src="assets/img/logo_transparent.png" class="logo"/>
+  <a routerLink="/" class="toolbar-title">
+    <img src="assets/img/logo_transparent.png" class="logo" alt="logo"/>
     YouCanCook
   </a>
-  <a class="nav-link" href="">
+  <a class="nav-link" routerLink="/">
     <mat-icon>home</mat-icon>
     Główna
   </a>
   <mat-divider vertical="true"></mat-divider>
+  <!--
   <a class="nav-link" href="">
     <mat-icon>search</mat-icon>
     Wyszukaj
   </a>
   <mat-divider vertical="true"></mat-divider>
+  -->
   <ng-container *ngIf="auth.isAuthenticated$ | async">
-    <a class="nav-link" href="">
+    <a class="nav-link" routerLink="/favourite">
       <mat-icon>star</mat-icon>
       Ulubione
     </a>
     <mat-divider vertical="true"></mat-divider>
 
-    <a class="nav-link" href="">
+    <a class="nav-link" routerLink="add">
       <mat-icon>add</mat-icon>
       Dodaj przepis
     </a>
     <mat-divider vertical="true"></mat-divider>
 
+    <a class="nav-link" routerLink="/my">
+      <mat-icon>receipt_long</mat-icon>
+      Moje przepisy
+    </a>
+    <mat-divider vertical="true"></mat-divider>
+
   </ng-container>
 
-  <a class="nav-link" href="">
+  <a class="nav-link" routerLink="/about">
     <mat-icon>info_outline</mat-icon>
     O projekcie
   </a>
   <mat-divider vertical="true"></mat-divider>
 
-  <a class="nav-link" href="">
+  <a class="nav-link" routerLink="/support">
     <mat-icon>question_answer</mat-icon>
     Kontakt
   </a>
@@ -42,7 +50,7 @@
   <span class="spacer"></span>
   <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
     <a class="nav-link profile-link" *ngIf="auth.user$ | async as user">
-      <img [src]="user.picture" class="user-pic"/>
+      <img [src]="user.picture" class="user-pic" alt="Awatar użytkownika"/>
       {{ user.name }}
     </a>
     <mat-divider vertical="true"></mat-divider>

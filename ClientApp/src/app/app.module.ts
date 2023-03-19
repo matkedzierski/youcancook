@@ -10,21 +10,19 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {FetchDataComponent} from "./pages/fetch-data/fetch-data.component";
 import {HomeComponent} from "./pages/home/home.component";
-import {CounterComponent} from "./pages/counter/counter.component";
 import {NavMenuComponent} from "./components/nav-menu/nav-menu.component";
 import {RecipeListItemComponent} from "./components/recipe-list-item/recipe-list-item.component";
 import {AuthModule} from "@auth0/auth0-angular";
 import {MatDividerModule} from "@angular/material/divider";
+import {AboutComponent} from "./pages/counter/about.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
+    AboutComponent,
     RecipeListItemComponent
   ],
   imports: [
@@ -40,7 +38,7 @@ import {MatDividerModule} from "@angular/material/divider";
     }),
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
+      {path: 'about', component: AboutComponent},
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,

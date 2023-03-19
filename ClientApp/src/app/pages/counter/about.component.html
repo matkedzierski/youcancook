@@ -1,0 +1,81 @@
+<h1>O projekcie</h1>
+
+<mat-card class="about-card mat-elevation-z7">
+  <mat-card-title>Przeznaczenie strony</mat-card-title>
+  <mat-card-content class="about-p">
+    Strona YouCanCook jest publicznie dostępnym narzędziem służącym do dzielenia się przepisami kulinarnymi.
+    Została ona utworzona od podstaw na potrzeby projektu zaliczeniowego
+    w ramach przedmiotu <b>Architektury i technologie systemów internetowych</b>.
+    Podstawowymi funkcjami strony są:
+    <ul>
+      <li class="about-li">Przeglądanie dostępnych przepisów kulinarnych</li>
+      <li class="about-li">Publikacja nowych przepisów</li>
+      <li class="about-li">Zapisywanie przepisów w "ulubionych"</li>
+      <li class="about-li">Przeglądanie własnych przepisów</li>
+      <li class="about-li">Formularz kontaktowy</li>
+    </ul>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="about-card mat-elevation-z7">
+  <mat-card-title>Zastosowane technologie</mat-card-title>
+  <mat-card-content>
+    <p class="about-p">
+      YouCanCook zostało zbudowane jako aplikacja typu SPA (Single Page Application) w technologii <b><a
+      href="https://angular.io/">Angular 13</a></b>. Jest to framework oparty o język TypeScript, który ułatwia
+      tworzenie dynamicznych aplikacji przeglądarkowych. Technologia ta została wybrana ze względu na wcześniejsze
+      doświadczenia z nią związane.
+    </p>
+
+    <p class="about-p">
+      Niektóre elementy interfejsu wykorzystane na stronie pochodzą z biblioteki <b><a
+      href="https://material.angular.io/">Material
+      Components</a></b>.
+      Umożliwiają one szybkie budowanie prostych a za razem efektownych interfejsów użytkownika w aplikacjach webowych.
+    </p>
+
+    <p class="about-p">
+      Do celów uwierzytelniania i autoryzacji zastosowano zewnętrznego dostawcę <b><a
+      href="https://auth0.com/">Auth0</a></b>,
+      który udostępnia mechanizmy logowania, rejestracji i autoryzacji dostępu w oparciu o standard OAuth. Integracja z
+      tym narzędziem
+      umożliwia uproszczenie implementacji zarządzania dostępem, realizuje interfejsy graficzne związane z autentykacją
+      (rejestracja, logowanie, zmiana hasła itp.),
+      pozwala zarządzać użytkownikami z poziomu panelu a nawet umożliwia integrację z innymi usługami autoryzacyjnymi -
+      na przykład logowanie przez Google.
+    </p>
+
+    <p class="about-p">
+      Strona wspierana jest przez backend zaimplementowany w technologii
+      <b><a href="https://learn.microsoft.com/pl-pl/aspnet/core/?view=aspnetcore-6.0">ASP.NET Core</a></b>.
+      Aplikacja backendowa udostępnia interfejs REST API, który służy do pobierania i zapisywania danych.
+      Tę technologię zastosowano w projekcie głównie ze względu na możliwość darmowego umieszczenia w internecie -
+      skorzystano tutaj z hostingu <b><a href="https://somee.com/">somee.com</a></b> który pozwala na hostowanie
+      aplikacji we wszystkich wersjach .NET.
+    </p>
+
+    <p class="about-p">
+      Na tym samym hostingu, co backend aplikacji, utrzymywana jest baza danych Microsoft SQL Server 2022. Dostęp do
+      danych wykorzystuje Entity Framework Core,
+      co pozwala utrzymać spójność modelu danych z informacjami w bazie, śledzić zmiany modelu oraz dostosowywać
+      strukturę bazy do tych zmian na podstawie tzw. migracji.
+      Baza przechowuje takie informacje jak:
+    </p>
+
+    <ul class="about-p">
+      <li class="about-li">Dane przepisów - tytuł, kategoria, krótki opis, czas przyrządzania, poziom trudności, liczba porcji, autor</li>
+      <li class="about-li">Ulubione - lista przepisów polubionych przez każdego z użytkowników</li>
+      <li class="about-li">Statystyki dotyczące przepisów - liczba polubień przepisu, najczęściej odwiedzane</li>
+    </ul>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="about-card mat-elevation-z7">
+  <mat-card-title>O autorze</mat-card-title>
+  <mat-card-content>
+    <p class="about-p">Imię i nazwisko: <b>Mateusz Kędzierski</b></p>
+    <p class="about-p">Numer indeksu: <b>329124</b></p>
+    <p class="about-p">Wydział: <b>Wydział Elektroniki i Technik Informacyjnych</b></p>
+    <p class="about-p">Kierunek: <b>Informatyka (Ośrodek Kształcenia na Odległość)</b></p>
+  </mat-card-content>
+</mat-card>
