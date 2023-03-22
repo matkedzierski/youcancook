@@ -6,10 +6,11 @@ using YouCanCook.Models;
 
 namespace YouCanCook.Data;
 
-public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+public class RecipesDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
-        : base(options, operationalStoreOptions)
+    public DbSet<Recipe> Recipes { get; set; }
+    public RecipesDbContext(DbContextOptions options)
+        : base(options)
     {
     }
 }

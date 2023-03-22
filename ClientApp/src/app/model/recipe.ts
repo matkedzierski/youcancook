@@ -7,6 +7,7 @@ export class Recipe {
   category?: Category;
   difficulty?: Difficulty;
   description?: string;
+  shortDescription?: string;
   preparationTimeMinutes?: number;
   portions?: number;
   imageUrl?: string;

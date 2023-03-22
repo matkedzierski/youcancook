@@ -12,6 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="JWT" Version="10.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.7" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.7" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
@@ -20,10 +21,6 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
     </ItemGroup>
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
@@ -38,7 +35,10 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ClientApp\src\app\components" />
+      <Folder Include="ClientApp\src\app\interceptor" />
       <Folder Include="ClientApp\src\app\pages" />
+      <Folder Include="ClientApp\src\app\services" />
+      <Folder Include="Migrations" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

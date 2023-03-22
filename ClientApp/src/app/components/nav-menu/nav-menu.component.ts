@@ -8,5 +8,5 @@ import {DOCUMENT} from "@angular/common";
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent {
-  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
+  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) { }
 }

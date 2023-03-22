@@ -1,6 +1,10 @@
 .recipe-card {
   margin-bottom: 20px;
   border-radius: 10px;
+
+}
+.recipe-card[routerlink] {
+  cursor: pointer;
 }
 
 .mat-card-title {

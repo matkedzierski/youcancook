@@ -7,7 +7,7 @@
   </mat-form-field>
   <mat-form-field class="field-full">
     <mat-label>Krótki opis</mat-label>
-    <input matInput [(ngModel)]="recipe.title"/>
+    <input matInput [(ngModel)]="recipe.shortDescription"/>
   </mat-form-field>
 
   <table class="field-full">
@@ -38,5 +38,5 @@
   </table>
 
 
-  <button mat-raised-button color="primary">Zapisz przepis</button>
+  <button mat-raised-button color="primary" (click)="saveRecipe(recipe)">Zapisz przepis</button>
 </div>

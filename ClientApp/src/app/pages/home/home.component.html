@@ -1,2 +1,3 @@
 <h1>Ostatnio dodane</h1>
 <app-recipe-list-item *ngFor="let recipe of this.recipes" [recipe]="recipe"></app-recipe-list-item>
+{{(auth.user$ | async)?.nickname}}
