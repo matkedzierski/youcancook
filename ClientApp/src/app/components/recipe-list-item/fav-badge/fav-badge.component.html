@@ -1,0 +1,4 @@
+<mat-icon *ngIf="!isFav; else fav">favorite_border</mat-icon>
+<ng-template #fav>
+  <mat-icon *ngIf="!isFav" class="fav-active">favorite</mat-icon>
+</ng-template>
