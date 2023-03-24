@@ -24,15 +24,9 @@ export class AddComponent implements OnInit {
 
   saveRecipe(recipe: Recipe) {
     if(!recipe.id){
-      console.log('adding recipe', recipe)
-      this.recipeService.add(recipe).subscribe(obj => {
-        console.log(`result: ${obj}`)
-      })
+      this.recipeService.add(recipe).subscribe()
     } else {
-      console.log('updating recipe', recipe)
-      this.recipeService.update(recipe).subscribe(obj => {
-        console.log(`result: ${obj}`)
-      })
+      this.recipeService.update(recipe).subscribe()
     }
   }
 }

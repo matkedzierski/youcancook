@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Recipe} from "../../model/recipe";
-import {Difficulty} from "../../model/difficulty.enum";
-import {Category} from "../../model/category.enum";
+import {FavouriteService} from "../../services/favourite.service";
+import {LoaderService} from "../../services/loader.service";
 
 @Component({
   selector: 'app-favourite',
@@ -10,15 +10,24 @@ import {Category} from "../../model/category.enum";
 })
 export class FavouriteComponent implements OnInit {
   recipes?: Recipe[];
-  testDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet ante non elit gravida porttitor. Integer posuere felis lorem, ac faucibus arcu commodo sed. Maecenas ullamcorper vulputate enim, sed euismod ante. In sed orci arcu. Aliquam at gravida lorem. Duis posuere porta sapien eget posuere. Morbi auctor nisi in est dignissim, non ornare est hendrerit. In nec dolor vel purus porta egestas eu porttitor enim. Donec egestas magna ac ligula posuere fermentum. Etiam tincidunt maximus efficitur. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.";
+  isLoading = true;
 
-  constructor() {
-    this.recipes = [];
-    this.recipes.push({title: "Kotlety schabowe", difficulty: Difficulty.Easy, portions: 4, category: Category.MAIN_DISHES, preparationTimeMinutes: 10, description: this.testDescription, imageUrl: "https://cataas.com/cat?test=1"})
-    this.recipes.push({title: "Kanapki", difficulty: Difficulty.Easy, portions: 12, category: Category.MAIN_DISHES, preparationTimeMinutes: 10, description: this.testDescription, imageUrl: "https://cataas.com/cat?test=4"})
+  constructor(public favouriteService: FavouriteService, public loader: LoaderService) {
+    loader.start();
+    favouriteService.getFavourites().subscribe(r => {
+      this.recipes = r;
+      loader.stop();
+    })
   }
 
   ngOnInit(): void {
   }
 
+
+  toggleFavourite(recipe: Recipe) {
+    this.favouriteService.toggleFavourite(recipe);
+    if (recipe.isFavourite) {
+      this.recipes = this.recipes?.filter(r => r != recipe);
+    }
+  }
 }

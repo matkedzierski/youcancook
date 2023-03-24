@@ -3,6 +3,7 @@
   border-radius: 10px;
 
 }
+
 .recipe-card[routerlink] {
   cursor: pointer;
 }
@@ -37,11 +38,17 @@
   margin-left: 5px;
 }
 
+.recipe-detail-icon.no-margin {
+  mat-icon {
+    margin-right: 0 !important;
+  }
+  padding: 0
+}
+
 .recipe-detail-icon {
   mat-icon {
-    vertical-align:middle;
+    vertical-align: middle;
     margin-right: 5px;
-    padding-bottom: 3px;
-
+    padding-bottom: 1px;
   }
 }

@@ -1,2 +1,16 @@
 <h1>Ulubione</h1>
-<app-recipe-list-item *ngFor="let recipe of this.recipes" [recipe]="recipe"></app-recipe-list-item>
+<ng-template *ngIf="!recipes; else empty">
+  <mat-spinner color="primary" [diameter]="200" style="margin: auto"></mat-spinner>
+</ng-template>
+
+<ng-template #empty>
+  <div *ngIf="recipes?.length === 0; else list">
+    Nie dodałeś jeszcze żadnego przepisu do ulubionych!
+    Znajdź przepis i użyj przycisku serduszka aby zapisać dowolny przepis na później.
+  </div>
+</ng-template>
+
+
+<ng-template #list>
+  <app-recipe-list-item (favourite)="toggleFavourite(recipe)" *ngFor="let recipe of this.recipes" [recipe]="recipe"></app-recipe-list-item>
+</ng-template>

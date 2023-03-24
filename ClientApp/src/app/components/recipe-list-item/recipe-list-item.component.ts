@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from "../../model/recipe";
 import {Category} from "../../model/category.enum";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-recipe-list-item',
@@ -11,6 +12,8 @@ export class RecipeListItemComponent implements OnInit {
 
   @Input()
   recipe?: Recipe;
+  @Output()
+  favourite = new Subject<Recipe>();
 
   categoryNames: Map<Category, string> = new Map([
     [Category.MAIN_DISHES, "Dania główne"],
@@ -28,5 +31,12 @@ export class RecipeListItemComponent implements OnInit {
 
   getCategoryName(category: Category | undefined) {
     return this.categoryNames.get(category!);
+  }
+
+  addFavourite(event: MouseEvent) {
+    if(this.recipe){
+      this.favourite.next(this.recipe);
+    }
+    event.stopPropagation();
   }
 }

@@ -2,9 +2,12 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {LogLevel} from "../app/utils/log-level.enum";
+
 export const environment = {
   production: false,
-  backendUrl: "https://localhost:7223"
+  backendUrl: "https://localhost:7223",
+  logLevel: LogLevel.Trace
 };
 
 /*

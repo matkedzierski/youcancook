@@ -9,6 +9,7 @@ namespace YouCanCook.Data;
 public class RecipesDbContext : DbContext
 {
     public DbSet<Recipe> Recipes { get; set; }
+    public DbSet<Favourite> Favourites { get; set; }
     public RecipesDbContext(DbContextOptions options)
         : base(options)
     {

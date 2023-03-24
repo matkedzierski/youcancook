@@ -28,6 +28,11 @@ import {MatSelectModule} from "@angular/material/select";
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { EditRecipeComponent } from './pages/edit/edit-recipe.component';
 import {environment} from "../environments/environment";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { FavBadgeComponent } from './components/recipe-list-item/fav-badge/fav-badge.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -42,7 +47,9 @@ import {environment} from "../environments/environment";
     MyComponent,
     LevelBadgeComponent,
     RecipeComponent,
-    EditRecipeComponent
+    EditRecipeComponent,
+    FavBadgeComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -87,7 +94,10 @@ import {environment} from "../environments/environment";
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     {
