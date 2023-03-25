@@ -34,6 +34,7 @@
       <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="ClientApp\src\app\components\dialogs" />
       <Folder Include="ClientApp\src\app\interceptor" />
       <Folder Include="ClientApp\src\app\pages" />
       <Folder Include="ClientApp\src\app\services" />

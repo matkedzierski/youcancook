@@ -60,7 +60,7 @@ export class RecipeService {
     return this.http.delete(`${baseUrl}/${recipe.id}`)
       .pipe(map(ret => {
         let time = Math.round(performance.now() - start);
-        this.log.debug(`RecipeService::update, time=${time}ms`);
+        this.log.debug(`RecipeService::delete, time=${time}ms`);
         return ret;
       }));
   }

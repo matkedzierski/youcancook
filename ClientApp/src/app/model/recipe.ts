@@ -7,7 +7,7 @@ export class Recipe {
   isFavourite?: boolean;
   category?: Category;
   difficulty?: Difficulty;
-  description?: string;
+  content?: string;
   shortDescription?: string;
   preparationTimeMinutes?: number;
   portions?: number;

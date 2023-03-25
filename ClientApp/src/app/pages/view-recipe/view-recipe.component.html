@@ -1,1 +1,2 @@
-<p>view-recipe works!</p>
+<h1 *ngIf="recipe" class="header bold">{{recipe?.title}}</h1>
+<div [innerHTML]="recipe?.content | safeHtml" id="content" #content></div>

@@ -27,12 +27,18 @@ import {MatSelectModule} from "@angular/material/select";
 import {environment} from "../environments/environment";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FavBadgeComponent} from './components/recipe-list-item/fav-badge/fav-badge.component';
-import {LoaderComponent} from './components/loader/loader.component';
+import {LoaderComponent} from './components/dialogs/loader/loader.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MyRecipeListItemComponent} from "./components/my-recipe-list-item/my-recipe-list-item.component";
 import {RecipeResolver} from "./utils/resolve/RecipeResolver";
-import {RecipeComponent} from "./pages/recipe/recipe.component";
+import {EditRecipeComponent} from "./pages/edit-recipe/edit-recipe.component";
+import {ConfirmDeleteComponent} from './components/dialogs/confirm-delete/confirm-delete.component';
+import {ViewRecipeComponent} from './pages/view-recipe/view-recipe.component';
+import {routes} from "./routes";
+import {RecipeEditorComponent} from './components/recipe-editor/recipe-editor.component';
+import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
+import { SafeHtmlPipe } from './utils/pipe/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -46,9 +52,13 @@ import {RecipeComponent} from "./pages/recipe/recipe.component";
     FavouriteComponent,
     MyComponent,
     LevelBadgeComponent,
-    RecipeComponent,
+    EditRecipeComponent,
     FavBadgeComponent,
     LoaderComponent,
+    ConfirmDeleteComponent,
+    ViewRecipeComponent,
+    RecipeEditorComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -74,19 +84,7 @@ import {RecipeComponent} from "./pages/recipe/recipe.component";
         }],
       },
     }),
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'favourite', component: FavouriteComponent},
-      {path: 'recipes/add', component: RecipeComponent, canActivate: [AuthGuard]},
-      {
-        path: 'recipes/edit/:id', component: RecipeComponent, canActivate: [AuthGuard],
-        resolve: {recipe: RecipeResolver}
-      },
-      {path: 'recipes/view/:id', component: RecipeComponent},
-      {path: 'my', component: MyComponent, canActivate: [AuthGuard]},
-      {path: 'about', component: AboutComponent},
-      {path: 'support', component: SupportComponent},
-    ]),
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatCardModule,
@@ -99,14 +97,19 @@ import {RecipeComponent} from "./pages/recipe/recipe.component";
     MatSelectModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    EditorModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true,
-    }, RecipeResolver
+    },
+    RecipeResolver,
+    {
+      provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js'
+    }
   ],
   bootstrap: [AppComponent]
 })

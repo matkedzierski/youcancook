@@ -2,17 +2,16 @@ import {AfterViewInit, Component, Input, NgZone, OnInit, ViewChild} from '@angul
 import {Recipe} from "../../model/recipe";
 import {Difficulty} from "../../model/difficulty.enum";
 import {RecipeService} from "../../services/recipe.service";
-import {ActivatedRoute} from "@angular/router";
-import {take} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 import {SnackService} from "../../services/snack.service";
 
 @Component({
   selector: 'app-recipe',
-  templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.scss']
+  templateUrl: './edit-recipe.component.html',
+  styleUrls: ['./edit-recipe.component.scss']
 })
-export class RecipeComponent implements OnInit, AfterViewInit {
+export class EditRecipeComponent implements OnInit, AfterViewInit {
   @Input()
   recipe: Recipe = new Recipe();
   difficulties = Object.values(Difficulty);
@@ -21,10 +20,13 @@ export class RecipeComponent implements OnInit, AfterViewInit {
     medium: "Średni",
     hard: "Trudny"
   }
+
   constructor(public recipeService: RecipeService,
               public activatedRoute: ActivatedRoute,
               public snack: SnackService,
-              private _ngZone: NgZone) { }
+              public router: Router,
+              private _ngZone: NgZone) {
+  }
 
   @ViewChild('autosize') autosize?: CdkTextareaAutosize;
 
@@ -33,25 +35,28 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ recipe }) => {
-      if(recipe){
+    this.activatedRoute.data.subscribe(({recipe}) => {
+      if (recipe) {
         this.recipe = recipe;
       }
     })
   }
 
   saveRecipe(recipe: Recipe) {
-    if(!recipe.id){
-      this.recipeService.add(recipe).subscribe({
-        next: () => {
-          this.snack.show("Pomyślnie dodano przepis!");
-
-        }
-      });
+    console.log(recipe);
+    if (!recipe.id) {
+      this.recipeService.add(recipe)
+        .subscribe({
+          next: async (created: Recipe) => {
+            this.snack.show("Pomyślnie dodano przepis!");
+            await this.router.navigate(['/recipes/view', created.id]);
+          }
+        });
     } else {
       this.recipeService.update(recipe).subscribe({
-        next: () => {
+        next: async () => {
           this.snack.show("Pomyślnie zapisano przepis!");
+          await this.router.navigate(['/recipes/view', recipe.id]);
         }
       });
     }

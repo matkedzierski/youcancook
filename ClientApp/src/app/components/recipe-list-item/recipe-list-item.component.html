@@ -1,4 +1,4 @@
-<mat-card class="recipe-card mat-elevation-z7" routerLink="/recipes/view/1">
+<mat-card class="recipe-card mat-elevation-z7" [routerLink]="['/recipes/view', recipe?.id]">
   <mat-card-header>
     <mat-card-title>{{recipe?.title}}</mat-card-title>
     <mat-card-subtitle>{{getCategoryName(recipe?.category)}}</mat-card-subtitle>
@@ -32,6 +32,6 @@
   </mat-card-header>
   <mat-card-content>
     <img class="recipe-img" mat-card-lg-image [src]="recipe?.imageUrl" alt="">
-    <span class="recipe-description">{{recipe?.description}}</span>
+    <span class="recipe-description">{{recipe?.shortDescription}}</span>
   </mat-card-content>
 </mat-card>

@@ -1,3 +1,12 @@
-<h1>Ostatnio dodane</h1>
-  <app-recipe-list-item *ngFor="let recipe of this.recipes" [recipe]="recipe" (favourite)="toggleFavourite(recipe)"></app-recipe-list-item>
-{{(auth.user$ | async)?.nickname}}
+<h1 *ngIf="recipes?.length" class="header bold">Ostatnio dodane</h1>
+<app-recipe-list-item *ngFor="let recipe of this.recipes" [recipe]="recipe"
+                      (favourite)="toggleFavourite(recipe)"></app-recipe-list-item>
+
+<ng-container *ngIf="recipes?.length == 0">
+  <h1 class="header bold">
+    Niczego tu nie ma...
+  </h1>
+  <h2 class="header">
+    Nie dodano jeszcze żadnych przepisów. Bądź pierwszy i <a routerLink="/recipes/add">dodaj przepis</a>!
+  </h2>
+</ng-container>

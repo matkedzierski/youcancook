@@ -15,6 +15,7 @@ public class RecipesController : Controller
         _dbContext = dbContext;
     }
 
+    [HttpGet]
     [Route("/Recipes")]
     public List<Recipe> GetRecipes()
     {
@@ -32,6 +33,7 @@ public class RecipesController : Controller
         return list;
     }
 
+    [HttpGet]
     [Route("/Recipes/{id:long}")]
     public ActionResult<Recipe> GetRecipe(long id)
     {
@@ -45,6 +47,23 @@ public class RecipesController : Controller
         return NotFound();
     }
 
+    [HttpDelete]
+    [Route("/Recipes/{id:long}")]
+    public ActionResult DeleteRecipe(long id)
+    {
+        var recipe = _dbContext.Recipes.Find(id);
+        Console.WriteLine($"Get recipe, id = {id}");
+        if (recipe == null) return NotFound();
+
+        _dbContext.Recipes.Remove(recipe);
+        _dbContext.Favourites.RemoveRange(
+            _dbContext.Favourites.Where(f => f.Recipe == recipe)
+        );
+        _dbContext.SaveChanges();
+        return Ok();
+    }
+
+    [Authorize]
     [Route("/Recipes/My")]
     public List<Recipe> GetOwnRecipes()
     {
@@ -66,7 +85,7 @@ public class RecipesController : Controller
         _dbContext.Recipes.Add(recipe);
         _dbContext.SaveChanges();
         Console.WriteLine($"Recipe {recipe.Id} added");
-        return Ok();
+        return Ok(recipe);
     }
 
     [Authorize]
@@ -81,54 +100,4 @@ public class RecipesController : Controller
         return Ok();
     }
 
-    [Authorize]
-    [HttpPost]
-    [Route("/Recipes/Favourites")]
-    public ActionResult AddToFavourites([FromQuery] long recipeId)
-    {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var recipe = _dbContext.Recipes.Find(recipeId);
-        if (recipe == null)
-        {
-            return NotFound();
-        }
-
-        _dbContext.Favourites.Add(new Favourite { UserId = userId, Recipe = recipe });
-        _dbContext.SaveChanges();
-        Console.WriteLine($"Recipe {recipeId} added to favourites");
-        return Ok();
-    }
-
-    [Authorize]
-    [HttpDelete]
-    [Route("/Recipes/Favourites/{id:long}")]
-    public ActionResult DeleteFavourite(long id)
-    {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var recipe = _dbContext.Recipes.Find(id);
-        if (recipe == null)
-        {
-            return NotFound();
-        }
-
-        var range = _dbContext.Favourites.Where(f => f.Recipe == recipe && f.UserId == userId);
-        _dbContext.Favourites.RemoveRange(range);
-        _dbContext.SaveChanges();
-        Console.WriteLine($"Recipe {id} added to favourites by {userId}");
-        return Ok();
-    }
-
-    [Authorize]
-    [HttpGet]
-    [Route("/Recipes/Favourites")]
-    public ActionResult GetFavourites()
-    {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var list = _dbContext.Favourites
-            .Where(f => f.UserId == userId)
-            .Select(f => f.Recipe).ToList();
-        list.ForEach(r => { r!.IsFavourite = true; });
-        Console.WriteLine($"Get favourites for user {userId}, size = {list.Count}");
-        return Ok(list);
-    }
 }

@@ -36,6 +36,8 @@
     <input matInput>
   </mat-form-field>
 
+  <app-recipe-editor [recipe]="recipe" [(ngModel)]="recipe.content"></app-recipe-editor>
+
 
   <button mat-raised-button color="primary" (click)="saveRecipe(recipe)">Zapisz przepis</button>
 </div>

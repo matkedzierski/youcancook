@@ -4,6 +4,7 @@ import {RecipeService} from "../../services/recipe.service";
 import {AuthService} from "@auth0/auth0-angular";
 import {FavouriteService} from "../../services/favourite.service";
 import {LoaderService} from "../../services/loader.service";
+import {LogService} from "../../services/log.service";
 import {SnackService} from "../../services/snack.service";
 
 @Component({
@@ -17,6 +18,8 @@ export class HomeComponent {
   constructor(public recipeService: RecipeService,
               public favouriteService: FavouriteService,
               public auth: AuthService,
+              public snack: SnackService,
+              public log: LogService,
               public loader: LoaderService) {
     this.loader.start();
     recipeService.getAll().subscribe(recipes => {
@@ -26,6 +29,13 @@ export class HomeComponent {
   }
 
   toggleFavourite(recipe: Recipe) {
-    this.favouriteService.toggleFavourite(recipe);
+    this.favouriteService.toggleFavourite(recipe).subscribe({
+      next: () => {
+      },
+      error: e => {
+        this.snack.showApiError(e);
+        this.log.error(e);
+      }
+    });
   }
 }

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using YouCanCook.Authorization;
 using YouCanCook.Data;
+using YouCanCook.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

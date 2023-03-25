@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {map, Observable} from "rxjs";
+import {map, Observable, throwError} from "rxjs";
 import {Recipe} from "../model/recipe";
 import {HttpClient} from "@angular/common/http";
 import {LogService} from "./log.service";
@@ -28,7 +28,7 @@ export class FavouriteService {
 
   addFavourite(id: number) {
     let start = performance.now();
-    return this.http.post(`${baseUrl}?recipeId=${id}`, {})
+    return this.http.post(`${baseUrl}/${id}`,'')
       .pipe(map(ret => {
         let time = Math.round(performance.now() - start);
         this.log.debug(`RecipeService::addFavourite, time=${time}ms`);
@@ -38,7 +38,7 @@ export class FavouriteService {
 
   removeFavourite(id: number) {
     let start = performance.now();
-    return this.http.delete(`${baseUrl}?recipeId=${id}`, {})
+    return this.http.delete(`${baseUrl}/${id}`)
       .pipe(map(ret => {
         let time = Math.round(performance.now() - start);
         this.log.debug(`RecipeService::removeFavourite, time=${time}ms`);
@@ -47,20 +47,17 @@ export class FavouriteService {
   }
 
   toggleFavourite(recipe: Recipe) {
-    if(recipe.id)
-      (recipe.isFavourite ? this.removeFavourite(recipe.id) : this.addFavourite(recipe.id))
-        .subscribe({
-          next: () => {
-            if (recipe.isFavourite) {
-              recipe.isFavourite = false;
-              this.snack.show("Usunięto z ulubionych!")
-            } else {
-              recipe.isFavourite = true;
-              this.snack.show("Dodano do ulubionych!")
-            }
-          }, error: () => {
-            this.snack.show("Błąd komunikacji. Spróbuj ponownie później!")
+    if (recipe.id)
+      return (recipe.isFavourite ? this.removeFavourite(recipe.id) : this.addFavourite(recipe.id))
+        .pipe(map(() => {
+          if (recipe.isFavourite) {
+            recipe.isFavourite = false;
+            this.snack.show("Usunięto z ulubionych!")
+          } else {
+            recipe.isFavourite = true;
+            this.snack.show("Dodano do ulubionych!")
           }
-        });
+        }));
+    return throwError(()=>{})
   }
 }

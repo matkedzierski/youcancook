@@ -1,4 +1,4 @@
-::ng-deep .mat-dialog-container {
+::ng-deep .dialog-transparent > mat-dialog-container {
   background: transparent !important;
   box-shadow: none;
 }

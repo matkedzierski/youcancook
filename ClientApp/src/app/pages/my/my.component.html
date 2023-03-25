@@ -1,14 +1,15 @@
-<h1>Moje przepisy</h1>
+<h1 *ngIf="recipes?.length" class="header bold">Moje przepisy</h1>
+<app-my-recipe-list-item
+  (delete)="deleteRecipe(recipe)"
+  *ngFor="let recipe of this.recipes"
+  [recipe]="recipe"></app-my-recipe-list-item>
 
-<div *ngIf="recipes?.length === 0; else list">
-  Nie dodałeś jeszcze żadnego przepisu do ulubionych!
-  Znajdź przepis i użyj przycisku serduszka aby zapisać dowolny przepis na później.
-</div>
-
-
-<ng-template #list>
-  <app-my-recipe-list-item
-    (delete)="deleteRecipe(recipe)"
-    *ngFor="let recipe of this.recipes"
-    [recipe]="recipe"></app-my-recipe-list-item>
-</ng-template>
+<ng-container *ngIf="recipes?.length == 0">
+  <h1 class="header bold">
+    Niczego tu nie ma...
+  </h1>
+  <h2 class="header">
+    Nie stworzyłeś jeszcze żadnego przepisu!<br>
+    Jeśli masz jakiś sprawdzony przepis, <a routerLink="/recipes/add">podziel się nim</a>!.
+  </h2>
+</ng-container>

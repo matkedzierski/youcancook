@@ -13,10 +13,16 @@ public class Recipe
     
     [Required]
     public string? Author { get; set; }
+
+    public List<string> Ingredients { get; set; } = new();
     
+    public string ShortDescription { get; set; }
     
-    [NotMapped]
-    public string AuthorName { get; set; }
+    public string Content { get; set; }
+    
+    //TODO: call user info service and add cron to update display name  
+    //[NotMapped]
+    //public string AuthorName { get; set; }
     
     [NotMapped]
     public bool IsFavourite { get; set; }
