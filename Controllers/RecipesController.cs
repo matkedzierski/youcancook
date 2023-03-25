@@ -8,7 +8,7 @@ namespace YouCanCook.Controllers;
 
 public class RecipesController : Controller
 {
-    RecipesDbContext _dbContext;
+    readonly RecipesDbContext _dbContext;
 
     public RecipesController(RecipesDbContext dbContext)
     {
@@ -28,6 +28,31 @@ public class RecipesController : Controller
                 r.IsFavourite = true;
             }
         });
+        Console.WriteLine($"Get all recipes, user = {userId}, size = {list.Count}");
+        return list;
+    }
+
+    [Route("/Recipes/{id:long}")]
+    public ActionResult<Recipe> GetRecipe(long id)
+    {
+        var recipe = _dbContext.Recipes.Find(id);
+        Console.WriteLine($"Get recipe, id = {id}");
+        if (recipe != null)
+        {
+            return recipe;
+        }
+
+        return NotFound();
+    }
+
+    [Route("/Recipes/My")]
+    public List<Recipe> GetOwnRecipes()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var list = _dbContext.Recipes
+            .Where(r => r.Author == userId)
+            .ToList();
+        Console.WriteLine($"Get own recipes, user = {userId}, size = {list.Count}");
         return list;
     }
 
@@ -46,9 +71,10 @@ public class RecipesController : Controller
 
     [Authorize]
     [HttpPut]
-    [Route("/Recipes")]
-    public ActionResult UpdateRecipe([FromBody] Recipe recipe)
+    [Route("/Recipes/{id:long}")]
+    public ActionResult UpdateRecipe(long id, [FromBody] Recipe recipe)
     {
+        recipe.Id = id;
         _dbContext.Recipes.Update(recipe);
         _dbContext.SaveChanges();
         Console.WriteLine($"Recipe {recipe.Id} added");
@@ -75,11 +101,11 @@ public class RecipesController : Controller
 
     [Authorize]
     [HttpDelete]
-    [Route("/Recipes/Favourites")]
-    public ActionResult DeleteFavourite([FromQuery] long recipeId)
+    [Route("/Recipes/Favourites/{id:long}")]
+    public ActionResult DeleteFavourite(long id)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var recipe = _dbContext.Recipes.Find(recipeId);
+        var recipe = _dbContext.Recipes.Find(id);
         if (recipe == null)
         {
             return NotFound();
@@ -88,7 +114,7 @@ public class RecipesController : Controller
         var range = _dbContext.Favourites.Where(f => f.Recipe == recipe && f.UserId == userId);
         _dbContext.Favourites.RemoveRange(range);
         _dbContext.SaveChanges();
-        Console.WriteLine($"Recipe {recipeId} added to favourites");
+        Console.WriteLine($"Recipe {id} added to favourites by {userId}");
         return Ok();
     }
 
@@ -101,11 +127,8 @@ public class RecipesController : Controller
         var list = _dbContext.Favourites
             .Where(f => f.UserId == userId)
             .Select(f => f.Recipe).ToList();
-        list.ForEach(r =>
-        {
-            r!.IsFavourite = true;
-        });
-        Console.WriteLine($"Get favourites for user {userId}, size = {list.Count()}");
+        list.ForEach(r => { r!.IsFavourite = true; });
+        Console.WriteLine($"Get favourites for user {userId}, size = {list.Count}");
         return Ok(list);
     }
 }

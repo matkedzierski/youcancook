@@ -1,1 +1,41 @@
-<p>recipe works!</p>
+<h1 *ngIf="!recipe.id">Dodaj przepis</h1>
+<h1 *ngIf="recipe.id">Edytuj przepis</h1>
+<div class="add-form">
+
+  <mat-form-field class="field-full" appearance="outline">
+    <mat-label>Nazwa</mat-label>
+    <input matInput [(ngModel)]="recipe.title"/>
+  </mat-form-field>
+
+  <mat-form-field class="field-full" appearance="outline">
+    <mat-label>Krótki opis</mat-label>
+    <textarea matInput
+              [(ngModel)]="recipe.shortDescription"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="5"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="field-full" appearance="outline">
+    <mat-label>Poziom trudności</mat-label>
+    <mat-select [(ngModel)]="recipe.difficulty" name="difficulty">
+      <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">
+        {{diffValues[difficulty]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="field-full" appearance="outline">
+    <mat-label>Czas przygotowania (min.)</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field class="field-full" appearance="outline">
+    <mat-label>Liczba porcji</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+
+  <button mat-raised-button color="primary" (click)="saveRecipe(recipe)">Zapisz przepis</button>
+</div>

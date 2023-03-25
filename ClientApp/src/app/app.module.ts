@@ -16,23 +16,23 @@ import {RecipeListItemComponent} from "./components/recipe-list-item/recipe-list
 import {AuthGuard, AuthHttpInterceptor, AuthModule} from "@auth0/auth0-angular";
 import {MatDividerModule} from "@angular/material/divider";
 import {AboutComponent} from "./pages/about/about.component";
-import { SupportComponent } from './pages/support/support.component';
-import { FavouriteComponent } from './pages/favourite/favourite.component';
-import { AddComponent } from './pages/add/add.component';
-import { MyComponent } from './pages/my/my.component';
-import { LevelBadgeComponent } from './components/recipe-list-item/level-badge/level-badge.component';
+import {SupportComponent} from './pages/support/support.component';
+import {FavouriteComponent} from './pages/favourite/favourite.component';
+import {MyComponent} from './pages/my/my.component';
+import {LevelBadgeComponent} from './components/recipe-list-item/level-badge/level-badge.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
-import { RecipeComponent } from './pages/recipe/recipe.component';
-import { EditRecipeComponent } from './pages/edit/edit-recipe.component';
 import {environment} from "../environments/environment";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { FavBadgeComponent } from './components/recipe-list-item/fav-badge/fav-badge.component';
-import { LoaderComponent } from './components/loader/loader.component';
+import {FavBadgeComponent} from './components/recipe-list-item/fav-badge/fav-badge.component';
+import {LoaderComponent} from './components/loader/loader.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MyRecipeListItemComponent} from "./components/my-recipe-list-item/my-recipe-list-item.component";
+import {RecipeResolver} from "./utils/resolve/RecipeResolver";
+import {RecipeComponent} from "./pages/recipe/recipe.component";
 
 @NgModule({
   declarations: [
@@ -41,15 +41,14 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     HomeComponent,
     AboutComponent,
     RecipeListItemComponent,
+    MyRecipeListItemComponent,
     SupportComponent,
     FavouriteComponent,
-    AddComponent,
     MyComponent,
     LevelBadgeComponent,
     RecipeComponent,
-    EditRecipeComponent,
     FavBadgeComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -78,9 +77,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'favourite', component: FavouriteComponent},
-      {path: 'recipes/add', component: AddComponent, canActivate: [AuthGuard]},
+      {path: 'recipes/add', component: RecipeComponent, canActivate: [AuthGuard]},
+      {
+        path: 'recipes/edit/:id', component: RecipeComponent, canActivate: [AuthGuard],
+        resolve: {recipe: RecipeResolver}
+      },
       {path: 'recipes/view/:id', component: RecipeComponent},
-      {path: 'recipes/edit/:id', component: EditRecipeComponent, canActivate: [AuthGuard]},
       {path: 'my', component: MyComponent, canActivate: [AuthGuard]},
       {path: 'about', component: AboutComponent},
       {path: 'support', component: SupportComponent},
@@ -104,7 +106,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true,
-    }
+    }, RecipeResolver
   ],
   bootstrap: [AppComponent]
 })

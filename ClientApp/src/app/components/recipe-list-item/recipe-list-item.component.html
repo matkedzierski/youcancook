@@ -22,7 +22,7 @@
             {{recipe?.portions}} os.
           </span>
         </mat-chip>
-        <mat-chip (click)="addFavourite($event)">
+        <mat-chip (click)="addFavourite($event)" class="clickable-chip">
           <span class="recipe-detail-icon no-margin">
             <app-fav-badge [isFav]="recipe?.isFavourite"></app-fav-badge>
           </span>
