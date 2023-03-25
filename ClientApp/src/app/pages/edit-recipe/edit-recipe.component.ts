@@ -5,6 +5,7 @@ import {RecipeService} from "../../services/recipe.service";
 import {ActivatedRoute} from "@angular/router";
 import {take} from "rxjs";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
+import {SnackService} from "../../services/snack.service";
 
 @Component({
   selector: 'app-recipe',
@@ -22,6 +23,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   }
   constructor(public recipeService: RecipeService,
               public activatedRoute: ActivatedRoute,
+              public snack: SnackService,
               private _ngZone: NgZone) { }
 
   @ViewChild('autosize') autosize?: CdkTextareaAutosize;
@@ -40,9 +42,18 @@ export class RecipeComponent implements OnInit, AfterViewInit {
 
   saveRecipe(recipe: Recipe) {
     if(!recipe.id){
-      this.recipeService.add(recipe).subscribe()
+      this.recipeService.add(recipe).subscribe({
+        next: () => {
+          this.snack.show("Pomyślnie dodano przepis!");
+
+        }
+      });
     } else {
-      this.recipeService.update(recipe).subscribe()
+      this.recipeService.update(recipe).subscribe({
+        next: () => {
+          this.snack.show("Pomyślnie zapisano przepis!");
+        }
+      });
     }
   }
 }
