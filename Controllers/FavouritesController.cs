@@ -8,7 +8,7 @@ namespace YouCanCook.Controllers;
 
 public class FavouritesController : Controller
 {
-    readonly RecipesDbContext _dbContext;
+    private readonly RecipesDbContext _dbContext;
 
     public FavouritesController(RecipesDbContext dbContext)
     {

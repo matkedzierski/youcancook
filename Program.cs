@@ -13,13 +13,9 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins(
-                "https://localhost:44473",
-                "https://youcancook.dev:44473/",
-                "https://youcancook.web.app");
+            policy.AllowAnyOrigin();
             policy.AllowAnyMethod();
             policy.AllowAnyHeader();
-            policy.AllowCredentials();
         });
 });
 

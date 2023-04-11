@@ -1,0 +1,37 @@
+:host {
+  display: inline-block;
+  float: left;
+}
+
+.picker-card{
+  //width: 160px;
+  height: 90px;
+  padding: 0;
+  margin-right: 5px;
+  text-align: center;
+  img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}
+
+.picked-image-button {
+  position: absolute;
+  top: -12px;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 200;
+  vertical-align: top;
+  mat-icon {
+    font-size: 14pt;
+    vertical-align: top;
+    position: relative;
+    top: -3px;
+  }
+}
+
+::ng-deep .mat-mini-fab .mat-button-wrapper{
+  padding: 0 !important;
+}

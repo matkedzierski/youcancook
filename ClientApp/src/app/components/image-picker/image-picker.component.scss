@@ -1,0 +1,32 @@
+.picker-container {
+  padding-bottom: 24.5px !important;
+}
+
+.outline {
+  margin: 4px 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  padding: 24px 13px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.outline:hover {
+  border: 2px solid black;
+  padding: 23px 12px;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-delay: 0s;
+  transition-property: border-color;
+}
+
+
+.thumbnails {
+  padding-top: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.clearfix {
+  clear: both;
+}

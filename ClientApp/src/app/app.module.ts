@@ -39,6 +39,10 @@ import {routes} from "./routes";
 import {RecipeEditorComponent} from './components/recipe-editor/recipe-editor.component';
 import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import { SafeHtmlPipe } from './utils/pipe/safe-html.pipe';
+import { ImagePickerComponent } from './components/image-picker/image-picker.component';
+import { PickedImageComponent } from './components/image-picker/picked-image/picked-image.component';
+import { PickImageComponent } from './components/image-picker/pick-image/pick-image.component';
+import {GalleryModule} from "ng-gallery";
 
 @NgModule({
   declarations: [
@@ -59,6 +63,9 @@ import { SafeHtmlPipe } from './utils/pipe/safe-html.pipe';
     ViewRecipeComponent,
     RecipeEditorComponent,
     SafeHtmlPipe,
+    ImagePickerComponent,
+    PickedImageComponent,
+    PickImageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -98,7 +105,8 @@ import { SafeHtmlPipe } from './utils/pipe/safe-html.pipe';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSnackBarModule,
-    EditorModule
+    EditorModule,
+    GalleryModule.withConfig({loop: true, imageSize: 'contain', thumbView: "default"})
   ],
   providers: [
     {

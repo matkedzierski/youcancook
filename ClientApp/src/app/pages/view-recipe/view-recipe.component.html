@@ -1,2 +1,3 @@
 <h1 *ngIf="recipe" class="header bold">{{recipe?.title}}</h1>
+<gallery id="gallery"></gallery>
 <div [innerHTML]="recipe?.content | safeHtml" id="content" #content></div>

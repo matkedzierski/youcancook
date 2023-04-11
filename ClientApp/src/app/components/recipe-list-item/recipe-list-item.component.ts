@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from "../../model/recipe";
 import {Category} from "../../model/category.enum";
 import {Subject} from "rxjs";
+import {ImageService} from "../../services/image.service";
 
 @Component({
   selector: 'app-recipe-list-item',
@@ -24,7 +25,7 @@ export class RecipeListItemComponent implements OnInit {
     [Category.SALADS, "Sałatki"]
   ]);
 
-  constructor() { }
+  constructor(public imageService: ImageService) { }
 
   ngOnInit(): void {
   }
@@ -38,5 +39,9 @@ export class RecipeListItemComponent implements OnInit {
       this.favourite.next(this.recipe);
     }
     event.stopPropagation();
+  }
+
+  getImageUrl(recipe?: Recipe) {
+    return this.imageService.getImageUrl(recipe);
   }
 }

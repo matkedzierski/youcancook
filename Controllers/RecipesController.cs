@@ -1,14 +1,15 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using YouCanCook.Data;
 using YouCanCook.Models;
 
 namespace YouCanCook.Controllers;
-
+    
 public class RecipesController : Controller
 {
-    readonly RecipesDbContext _dbContext;
+    private readonly RecipesDbContext _dbContext;
 
     public RecipesController(RecipesDbContext dbContext)
     {
@@ -21,7 +22,9 @@ public class RecipesController : Controller
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var fav = _dbContext.Favourites.Where(f => f.UserId == userId).Select(f => f.Recipe!.Id);
-        var list = _dbContext.Recipes.ToList();
+        var list = _dbContext.Recipes
+            .Include(r => r.Images)
+            .ToList();
         list.ForEach(r =>
         {
             if (fav.Contains(r.Id))
@@ -37,7 +40,10 @@ public class RecipesController : Controller
     [Route("/Recipes/{id:long}")]
     public ActionResult<Recipe> GetRecipe(long id)
     {
-        var recipe = _dbContext.Recipes.Find(id);
+        var recipe = _dbContext
+            .Recipes
+            .Include(r => r.Images)
+            .FirstOrDefault(r => r.Id == id);
         Console.WriteLine($"Get recipe, id = {id}");
         if (recipe != null)
         {

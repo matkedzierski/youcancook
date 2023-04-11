@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Duende.IdentityServer.EntityFramework.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 using YouCanCook.Models;
@@ -10,8 +7,10 @@ namespace YouCanCook.Data;
 
 public class RecipesDbContext : DbContext
 {
-    public DbSet<Recipe>? Recipes { get; set; }
-    public DbSet<Favourite>? Favourites { get; set; }
+    public DbSet<Recipe> Recipes { get; set; } = null!;
+    public DbSet<Favourite> Favourites { get; set; } = null!;
+    public DbSet<RecipeImage> Images { get; set; } = null!;
+
     public RecipesDbContext(DbContextOptions options)
         : base(options)
     {

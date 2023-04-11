@@ -1,0 +1,11 @@
+<div class="picker-container">
+  <div class="outline">
+    Zdjęcia
+    <div class="thumbnails">
+      <app-picked-image (delete)="deleteImage($event)" *ngFor="let image of images" [image]="image"></app-picked-image>
+      <app-pick-image *ngIf="images && (images.length < maxImages)" (image)="addImage($event)"></app-pick-image>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+</div>

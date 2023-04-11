@@ -5,6 +5,7 @@ import {RecipeService} from "../../services/recipe.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 import {SnackService} from "../../services/snack.service";
+import {RecipeImage} from "../../model/recipe-image";
 
 @Component({
   selector: 'app-recipe',
@@ -43,7 +44,6 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
   }
 
   saveRecipe(recipe: Recipe) {
-    console.log(recipe);
     if (!recipe.id) {
       this.recipeService.add(recipe)
         .subscribe({

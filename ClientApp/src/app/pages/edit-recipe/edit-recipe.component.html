@@ -17,6 +17,8 @@
               cdkAutosizeMaxRows="5"></textarea>
   </mat-form-field>
 
+  <app-image-picker [(images)]="recipe.images"></app-image-picker>
+
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Poziom trudności</mat-label>
     <mat-select [(ngModel)]="recipe.difficulty" name="difficulty">

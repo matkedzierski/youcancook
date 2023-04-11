@@ -1,0 +1,31 @@
+:host {
+  display: inline-block;
+  float: left;
+}
+
+.picker-card {
+  width: 120px;
+  height: 90px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.add-icon {
+  font-size: 70px;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  opacity: 0.8;
+  padding-top: 10px;
+}
+
+.fileinput {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+}

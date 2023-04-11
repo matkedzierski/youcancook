@@ -65,9 +65,9 @@ export class RecipeService {
       }));
   }
 
-  add(recipe: Recipe) {
+  add(recipe: Recipe): Observable<Recipe> {
     let start = performance.now();
-    return this.http.post(baseUrl, recipe)
+    return this.http.post<Recipe>(baseUrl, recipe)
       .pipe(map(ret => {
         let time = Math.round(performance.now() - start);
         this.log.debug(`RecipeService::add, time=${time}ms`);

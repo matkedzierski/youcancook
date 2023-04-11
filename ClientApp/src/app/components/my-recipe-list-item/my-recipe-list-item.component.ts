@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from "../../model/recipe";
 import {Category} from "../../model/category.enum";
 import {Subject} from "rxjs";
+import {ImageService} from "../../services/image.service";
 
 @Component({
   selector: 'app-my-recipe-list-item',
@@ -26,7 +27,7 @@ export class MyRecipeListItemComponent implements OnInit {
     [Category.SALADS, "Sałatki"]
   ]);
 
-  constructor() { }
+  constructor(public imageService: ImageService) { }
 
   ngOnInit(): void {
   }
@@ -54,5 +55,9 @@ export class MyRecipeListItemComponent implements OnInit {
       return `/recipes/edit/${recipe.id}`;
     }
     return undefined;
+  }
+
+  getImageUrl(recipe?: Recipe) {
+    return this.imageService.getImageUrl(recipe);
   }
 }
