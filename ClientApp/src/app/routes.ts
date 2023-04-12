@@ -7,8 +7,9 @@ import {ViewRecipeComponent} from "./pages/view-recipe/view-recipe.component";
 import {MyComponent} from "./pages/my/my.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {SupportComponent} from "./pages/support/support.component";
+import { Routes } from "@angular/router";
 
-export const routes = [
+export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
