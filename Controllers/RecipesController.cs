@@ -100,6 +100,8 @@ public class RecipesController : Controller
     public ActionResult UpdateRecipe(long id, [FromBody] Recipe recipe)
     {
         recipe.Id = id;
+
+        _dbContext.Images.RemoveRange(_dbContext.Images.Where(i => i.Recipe == recipe && (recipe.Images == null || !recipe.Images.Contains(i))));
         _dbContext.Recipes.Update(recipe);
         _dbContext.SaveChanges();
         Console.WriteLine($"Recipe {recipe.Id} added");

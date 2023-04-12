@@ -6,7 +6,7 @@ export class Recipe {
   id?: number;
   title?: string;
   isFavourite?: boolean;
-  category?: Category = Category.PIZZA;
+  category?: Category;
   difficulty?: Difficulty = Difficulty.Hard;
   content?: string;
   shortDescription?: string;

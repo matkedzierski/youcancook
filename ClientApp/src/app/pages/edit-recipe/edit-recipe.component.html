@@ -8,6 +8,15 @@
   </mat-form-field>
 
   <mat-form-field class="field-full" appearance="outline">
+    <mat-label>Kategoria</mat-label>
+    <mat-select [(ngModel)]="recipe.category" name="category">
+      <mat-option *ngFor="let category of categoryNames.keys()" [value]="category">
+        {{categoryNames.get(category)}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="field-full" appearance="outline">
     <mat-label>Krótki opis</mat-label>
     <textarea matInput
               [(ngModel)]="recipe.shortDescription"

@@ -1,9 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Recipe} from "../../model/recipe";
 import {ActivatedRoute} from "@angular/router";
 import {ImageService} from "../../services/image.service";
-import {Gallery, GalleryRef} from "ng-gallery";
-import {map} from "rxjs";
 
 @Component({
   selector: 'app-view-recipe',
@@ -11,24 +9,21 @@ import {map} from "rxjs";
   styleUrls: ['./view-recipe.component.scss']
 })
 export class ViewRecipeComponent implements OnInit {
-  @Input()
   recipe: Recipe = new Recipe();
-  constructor(public activatedRoute: ActivatedRoute, public imageService: ImageService, private gallery: Gallery) { }
+  images:{image: string, thumbImage: string}[] = [];
+  constructor(public activatedRoute: ActivatedRoute, public imageService: ImageService) { }
 
   ngOnInit(): void {
-    const galleryRef: GalleryRef = this.gallery.ref('gallery');
 
     this.activatedRoute.data.subscribe( (data) => {
-      let recipe: Recipe = data.recipe;
-      if(recipe){
-        this.recipe = recipe;
-        recipe.images.forEach(image => {
+      this.recipe = data.recipe;
+      if(this.recipe && this.recipe.images){
+        this.recipe.images.forEach(image => {
           let url = this.imageService.getImageUrlOrContent(image);
-          galleryRef.addImage({src: url, thumb: url});
+          this.images.push({image: url, thumbImage: url})
         });
         //new ImageItem({src: this.imageService.getImageUrlOrContent(i), type: ''});
       }
     })
   }
-
 }

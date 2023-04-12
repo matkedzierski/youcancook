@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 import {SnackService} from "../../services/snack.service";
 import {RecipeImage} from "../../model/recipe-image";
+import {Category} from "../../model/category.enum";
 
 @Component({
   selector: 'app-recipe',
@@ -21,6 +22,15 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
     medium: "Średni",
     hard: "Trudny"
   }
+
+  categoryNames: Map<Category, string> = new Map([
+    [Category.MAIN_DISHES, "Dania główne"],
+    [Category.SOUPS, "Zupy"],
+    [Category.DESSERTS, "Desery"],
+    [Category.PASTA, "Makarony"],
+    [Category.PIZZA, "Pizza"],
+    [Category.SALADS, "Sałatki"]
+  ]);
 
   constructor(public recipeService: RecipeService,
               public activatedRoute: ActivatedRoute,

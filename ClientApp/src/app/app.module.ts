@@ -13,7 +13,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {HomeComponent} from "./pages/home/home.component";
 import {NavMenuComponent} from "./components/nav-menu/nav-menu.component";
 import {RecipeListItemComponent} from "./components/recipe-list-item/recipe-list-item.component";
-import {AuthGuard, AuthHttpInterceptor, AuthModule} from "@auth0/auth0-angular";
+import {AuthHttpInterceptor, AuthModule} from "@auth0/auth0-angular";
 import {MatDividerModule} from "@angular/material/divider";
 import {AboutComponent} from "./pages/about/about.component";
 import {SupportComponent} from './pages/support/support.component';
@@ -42,7 +42,7 @@ import { SafeHtmlPipe } from './utils/pipe/safe-html.pipe';
 import { ImagePickerComponent } from './components/image-picker/image-picker.component';
 import { PickedImageComponent } from './components/image-picker/picked-image/picked-image.component';
 import { PickImageComponent } from './components/image-picker/pick-image/pick-image.component';
-import {GalleryModule} from "ng-gallery";
+import {PhotoGalleryModule} from "@twogate/ngx-photo-gallery";
 
 @NgModule({
   declarations: [
@@ -106,7 +106,7 @@ import {GalleryModule} from "ng-gallery";
     MatDialogModule,
     MatSnackBarModule,
     EditorModule,
-    GalleryModule.withConfig({loop: true, imageSize: 'contain', thumbView: "default"})
+    PhotoGalleryModule
   ],
   providers: [
     {

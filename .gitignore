@@ -7,3 +7,4 @@ riderModule.iml
 .idea
 ClientApp/package-lock.json
 Migrations
+/node_modules/

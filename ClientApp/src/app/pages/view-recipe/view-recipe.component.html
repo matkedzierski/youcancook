@@ -1,3 +1,18 @@
 <h1 *ngIf="recipe" class="header bold">{{recipe?.title}}</h1>
-<gallery id="gallery"></gallery>
-<div [innerHTML]="recipe?.content | safeHtml" id="content" #content></div>
+<mat-card>
+  <mat-card-title>Galeria</mat-card-title>
+  <mat-card-content style="text-align: center">
+  <div class="images" id="gallery" [photoGalleryGroup]="{arrowEl: true}">
+      <div class="images-item" *ngFor="let im of images" [photoGallery]="im.image">
+        <img alt="img1" [src]="im.thumbImage" />
+      </div>
+  </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card style="margin-top: 15px;">
+  <mat-card-title>Treść przepisu</mat-card-title>
+  <mat-card-content>
+  <div [innerHTML]="recipe?.content | safeHtml" id="content" #content></div>
+  </mat-card-content>
+</mat-card>

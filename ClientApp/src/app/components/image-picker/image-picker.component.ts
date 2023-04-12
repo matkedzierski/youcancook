@@ -12,7 +12,7 @@ export class ImagePickerComponent implements OnInit {
   images: RecipeImage[] = [];
   @Output()
   imagesChange = new EventEmitter<RecipeImage[]>();
-  maxImages: number = 5;
+  maxImages: number = 50;
 
   constructor() { }
 
