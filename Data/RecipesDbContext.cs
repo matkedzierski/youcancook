@@ -14,7 +14,6 @@ public class RecipesDbContext : DbContext
     public RecipesDbContext(DbContextOptions options)
         : base(options)
     {
-        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,7 +28,7 @@ public class RecipesDbContext : DbContext
             (c1, c2) => c2 != null && c1 != null && c1.SequenceEqual(c2),
             c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
             c => c.ToList());
-        
+
         modelBuilder.Entity<Recipe>().Property(p => p.Ingredients)
             .HasConversion(
                 v => JsonConvert.SerializeObject(v),

@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using YouCanCook.Data;
 using YouCanCook.Models;
 
@@ -59,6 +60,7 @@ public class FavouritesController : Controller
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var list = _dbContext.Favourites
+            .Include(fav => fav.Recipe!.Images)
             .Where(f => f.UserId == userId)
             .Select(f => f.Recipe).ToList();
         list.ForEach(r => { r!.IsFavourite = true; });

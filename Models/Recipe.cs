@@ -14,7 +14,7 @@ public class Recipe
     public List<string> Ingredients { get; set; } = new();
 
     public string? ShortDescription { get; set; }
-    
+
     public string? Content { get; set; }
 
     public List<RecipeImage>? Images { get; set; }

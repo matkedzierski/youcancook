@@ -6,7 +6,7 @@ using YouCanCook.Data;
 using YouCanCook.Models;
 
 namespace YouCanCook.Controllers;
-    
+
 public class RecipesController : Controller
 {
     private readonly RecipesDbContext _dbContext;
@@ -75,6 +75,7 @@ public class RecipesController : Controller
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var list = _dbContext.Recipes
+            .Include(r => r.Images)
             .Where(r => r.Author == userId)
             .ToList();
         Console.WriteLine($"Get own recipes, user = {userId}, size = {list.Count}");
@@ -101,11 +102,11 @@ public class RecipesController : Controller
     {
         recipe.Id = id;
 
-        _dbContext.Images.RemoveRange(_dbContext.Images.Where(i => i.Recipe == recipe && (recipe.Images == null || !recipe.Images.Contains(i))));
+        _dbContext.Images.RemoveRange(_dbContext.Images.Where(i =>
+            i.Recipe == recipe && (recipe.Images == null || !recipe.Images.Contains(i))));
         _dbContext.Recipes.Update(recipe);
         _dbContext.SaveChanges();
         Console.WriteLine($"Recipe {recipe.Id} added");
         return Ok();
     }
-
 }

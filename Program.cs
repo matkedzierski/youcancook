@@ -39,14 +39,14 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("recipes:read", policy => policy.Requirements.Add(new RbacRequirement("recipes:read")));
-    
 });
 builder.Services.AddSingleton<IAuthorizationHandler, RbacHandler>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-});;
+});
+;
 
 
 var app = builder.Build();

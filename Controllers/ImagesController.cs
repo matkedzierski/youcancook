@@ -40,7 +40,5 @@ public class ImagesController : Controller
         var content = Base64UrlEncoder.DecodeBytes(image.Content?.Split(',')[1]);
         var type = image.Content?.Split(":")[1].Split(";")[0];
         return File(content, type ?? "binary/octet-stream");
-
     }
-
 }

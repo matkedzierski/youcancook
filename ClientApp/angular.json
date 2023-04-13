@@ -26,6 +26,11 @@
             "assets": [
               "src/assets",
               {
+                "glob": "**/*.@(svg|png|gif)",
+                "input": "./node_modules/photoswipe/src/css/default-skin",
+                "output": "/assets/media/"
+              },
+              {
                 "glob": "**/*",
                 "input": "node_modules/tinymce",
                 "output": "/tinymce/"
@@ -104,6 +109,11 @@
                 "glob": "**/*",
                 "input": "node_modules/tinymce",
                 "output": "/tinymce/"
+              },
+              {
+                "glob": "**/*.@(svg|png|gif)",
+                "input": "./node_modules/photoswipe/src/css/default-skin",
+                "output": "/assets/media/"
               }
             ],
             "styles": [
