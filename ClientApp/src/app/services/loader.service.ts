@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {LoaderComponent} from "../components/dialogs/loader/loader.component";
 
-const timeout = 100000;
+const timeout = 10000;
 
 @Injectable({
   providedIn: 'root'

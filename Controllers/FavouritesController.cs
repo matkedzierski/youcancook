@@ -60,10 +60,14 @@ public class FavouritesController : Controller
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var list = _dbContext.Favourites
-            .Include(fav => fav.Recipe!.Images)
+            .Include(fav => fav.Recipe!.Images!.Where(im => im.Order == 0))
             .Where(f => f.UserId == userId)
             .Select(f => f.Recipe).ToList();
-        list.ForEach(r => { r!.IsFavourite = true; });
+        list.ForEach(r =>
+        {
+            r!.IsFavourite = true;
+            r.Content = null;
+        });
         Console.WriteLine($"Get favourites for user {userId}, size = {list.Count}");
         return Ok(list);
     }

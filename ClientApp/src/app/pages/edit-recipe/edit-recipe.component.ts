@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 import {SnackService} from "../../services/snack.service";
 import {Category} from "../../model/category.enum";
+import {LoaderService} from "../../services/loader.service";
 
 @Component({
   selector: 'app-recipe',
@@ -37,6 +38,7 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
               public activatedRoute: ActivatedRoute,
               public snack: SnackService,
               public router: Router,
+              public loader: LoaderService,
               private _ngZone: NgZone) {
   }
 
@@ -54,12 +56,14 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
   }
 
   saveRecipe(recipe: Recipe) {
+    this.loader.start();
     if (!recipe.id) {
       this.recipeService.add(recipe)
         .subscribe({
           next: async (created: Recipe) => {
             this.snack.show("Pomyślnie dodano przepis!");
             await this.router.navigate(['/recipes/view', created.id]);
+            this.loader.stop();
           }
         });
     } else {
@@ -67,6 +71,7 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
         next: async () => {
           this.snack.show("Pomyślnie zapisano przepis!");
           await this.router.navigate(['/recipes/view', recipe.id]);
+          this.loader.stop();
         }
       });
     }

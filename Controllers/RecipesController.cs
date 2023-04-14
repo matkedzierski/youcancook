@@ -23,14 +23,13 @@ public class RecipesController : Controller
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var fav = _dbContext.Favourites.Where(f => f.UserId == userId).Select(f => f.Recipe!.Id);
         var list = _dbContext.Recipes
-            .Include(r => r.Images)
+            .Include(r => r.Images!.Where(im => im.Order == 0))
             .ToList();
         list.ForEach(r =>
         {
-            if (fav.Contains(r.Id))
-            {
-                r.IsFavourite = true;
-            }
+            r.Content = null;
+            if (!fav.Contains(r.Id)) return;
+            r.IsFavourite = true;
         });
         Console.WriteLine($"Get all recipes, user = {userId}, size = {list.Count}");
         return list;
@@ -75,9 +74,10 @@ public class RecipesController : Controller
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var list = _dbContext.Recipes
-            .Include(r => r.Images)
+            .Include(r => r.Images!.Where(im => im.Order == 0))
             .Where(r => r.Author == userId)
             .ToList();
+        list.ForEach(re => re.Content = null);
         Console.WriteLine($"Get own recipes, user = {userId}, size = {list.Count}");
         return list;
     }

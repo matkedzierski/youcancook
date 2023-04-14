@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Recipe} from "../model/recipe";
 import {map, Observable} from "rxjs";
 import {LogService} from "./log.service";
+import {LoaderService} from "./loader.service";
 
 const baseUrl = `${environment.backendUrl}/Recipes`;
 
@@ -12,7 +13,7 @@ const baseUrl = `${environment.backendUrl}/Recipes`;
 })
 export class RecipeService {
 
-  constructor(public http: HttpClient, public log: LogService) {
+  constructor(public http: HttpClient, public log: LogService, public loaderService: LoaderService) {
   }
 
   getAll(): Observable<Recipe[]> {
@@ -27,10 +28,12 @@ export class RecipeService {
 
   getRecipe(id: number): Observable<Recipe> {
     let start = performance.now();
+    this.loaderService.start();
     return this.http.get<Recipe>(`${baseUrl}/${id}`)
       .pipe(map(ret => {
         let time = Math.round(performance.now() - start);
         this.log.debug(`RecipeService::getRecipe, time=${time}ms`);
+        this.loaderService.stop();
         return ret;
       }));
   }

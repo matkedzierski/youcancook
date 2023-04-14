@@ -1,5 +1,48 @@
 <h1 *ngIf="recipe" class="header bold">{{recipe.title}}</h1>
-<mat-card>
+
+<mat-card *ngIf="recipe.images.length" style="margin-top: 15px;">
+  <mat-card-title>Informacje wstępne</mat-card-title>
+  <mat-card-content style="font-size: 1.3em;">
+    <br>
+    Kategoria&nbsp;&nbsp;
+    <mat-chip-list>
+      <mat-chip>
+          <span class="recipe-detail-icon">
+            <span>{{getCategory(recipe.category)}}</span>
+          </span>
+      </mat-chip>
+    </mat-chip-list><br><br>
+    Poziom trudności&nbsp;&nbsp;
+    <mat-chip-list>
+      <mat-chip>
+          <span class="recipe-detail-icon">
+            <mat-icon>speed</mat-icon>
+            <app-level-badge [level]="recipe?.difficulty"></app-level-badge>
+          </span>
+      </mat-chip>
+    </mat-chip-list><br><br>
+    Czas przygotowania&nbsp;&nbsp;
+    <mat-chip-list>
+      <mat-chip>
+          <span class="recipe-detail-icon">
+            <mat-icon>timer</mat-icon>
+            <span>{{recipe?.preparationTimeMinutes}} min.</span>
+          </span>
+      </mat-chip>
+    </mat-chip-list><br><br>
+    Liczba porcji&nbsp;&nbsp;
+    <mat-chip-list>
+      <mat-chip>
+          <span class="recipe-detail-icon">
+            <mat-icon>person</mat-icon>
+            <span>{{recipe?.portions}} os.</span>
+          </span>
+      </mat-chip>
+    </mat-chip-list><br>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="recipe.images.length" style="margin-top: 15px;">
   <mat-card-title>Galeria</mat-card-title>
   <mat-card-content style="text-align: center">
   <div class="images" id="gallery" [photoGalleryGroup]="{arrowEl: true}">
@@ -16,6 +59,6 @@
 <mat-card style="margin-top: 15px;">
   <mat-card-title style="margin-bottom: 20px;">Treść przepisu</mat-card-title>
   <mat-card-content>
-  <div [innerHTML]="recipe.content | safeHtml" id="content" #content></div>
+  <div [innerHTML]="recipe.content | safeHtml" id="content"></div>
   </mat-card-content>
 </mat-card>

@@ -53,5 +53,7 @@
   <app-recipe-editor [recipe]="recipe" [(ngModel)]="recipe.content" name="content"></app-recipe-editor>
 
 
-  <button mat-raised-button color="primary" (click)="saveRecipe(recipe)" [disabled]="!recipeForm.form.valid">Zapisz przepis</button>
+  <button mat-raised-button color="primary" (click)="saveRecipe(recipe)" [disabled]="!recipeForm.form.valid">
+    Zapisz przepis
+  </button>
 </form>

@@ -11,8 +11,7 @@
       <li class="about-li">Przeglądanie dostępnych przepisów kulinarnych</li>
       <li class="about-li">Publikacja nowych przepisów</li>
       <li class="about-li">Zapisywanie przepisów w "ulubionych"</li>
-      <li class="about-li">Przeglądanie własnych przepisów</li>
-      <li class="about-li">Formularz kontaktowy</li>
+      <li class="about-li">Przeglądanie i edycja własnych przepisów</li>
     </ul>
   </mat-card-content>
 </mat-card>
@@ -66,9 +65,65 @@
 
     <ul class="about-p">
       <li class="about-li">Dane przepisów - tytuł, kategoria, krótki opis, czas przyrządzania, poziom trudności, liczba porcji, autor</li>
+      <li class="about-li">Zdjęcia - obrazy dodane przez użytkownika w ramach każdego przepisu</li>
       <li class="about-li">Ulubione - lista przepisów polubionych przez każdego z użytkowników</li>
-      <li class="about-li">Statystyki dotyczące przepisów - liczba polubień przepisu, najczęściej odwiedzane</li>
     </ul>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="about-card mat-elevation-z4">
+  <mat-card-title>Założenia nawigacji</mat-card-title>
+  <mat-card-content>
+    <p class="about-p">
+      Serwis internetowy YouCanCook jest aplikacją typu SPA (ang. <i>single-page application</i>). W związku z tym, nawigacja po stronie odbywa się nieco inaczej niż
+      w tradycyjnych stronach pisanych w "czystym" HTML. Angular wykorzystuje funkcjonalność zwaną "routingiem". Działanie tego mechanizmu polega na tym, że obecny w strukturze strony element &lt;router-outlet&gt;
+      w zależności od aktywnej ścieżki zawiera treść wygenerowaną i podstawioną w sposób automatyczny przez mechanizmy JavaScriptowe.
+    </p>
+    <p class="about-p">
+      Mimo, że przeglądarka sprawia wrażenie, że porusza się po różnych podstronach (osobnych plikach HTML),
+      ponieważ pasek adresu zmienia swą wartość, to jednak jedynym wczytywanym plikiem HTML jest <i>index.html</i>, a jego zawartość jest dynamicznie uzupełniana. Takie rozwiązanie pozwala przechodzić między widokami bez ponownego ładowania
+      strony wraz ze wszystkimi zasobami (style, skrypty, obrazki). Jest to szczególnie użyteczne w przypadku dynamicznych aplikacji budowanych przy użyciu frameworków JS, ponieważ aplikacje te mają sporo zasobów, które musiałyby być przeładowywane.
+    </p>
+    <p class="about-p">
+      Pasek nawigacji jest wspólnym elementem każdego widoku. W momencie kliknięcia wybranego linku spośród dostępnych opcji, aktywowana jest nowa ścieżka (activated route). W niektórych przypadkach już na etapie aktywacji ścieżki wczytywane są dane
+      z serwera backendowego (na przykład dane przepisu) i dopiero po wczytaniu tych danych, wyświetlany jest żądany widok. Warto także zwrócić uwagę, że niektóre elementy menu nawigacyjnego dostępne są wyłącznie dla osób zalogowanych.
+      Początkowa koncepcja przewidywała dostęp do poszczególnych funkcji aplikacji w zależności od przydzielonych ról, jednak ilość tych funkcji okazała się na tyle mała, że utworzony mechanizm Role-Based Access Control obsługuje tylko jedną rolę.
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="about-card mat-elevation-z4">
+  <mat-card-title>Stosunek do wymagań projektowych</mat-card-title>
+  <mat-card-content>
+    <p class="about-p">
+      Niniejsza strona została stworzona stosownie do wymagań określonych w dokumencie dostarczonym przez prowadzącego. Szczególną uwagę w kontekście spełnienia wymagań poświęcono poniższym zagadnieniom:
+    </p>
+    <p class="about-p">
+      Kod HTML strony stanowi poprawną strukturę zgodną ze standardem HTML. Niestety z uwagi na charakterystykę zastosowanej technologii, wykorzystany został HTML5 zamiast zalecanego 4.01.
+      Poprawność struktury może być jednak zweryfikowana przy użyciu <a href="https://validator.w3.org/">walidatora HTML</a>.
+      Należy zwrócić uwagę, że walidator ten pobierze tylko inicjalną zawartość pliku index.html, więc celu sprawdzenia całości wygenerowanej treści,
+      najlepiej skopiować kod źródłowy strony po jej załadowaniu lub zapisać do pliku i wgrać plik na stronie walidatora. Jedynym rodzajem błędu jaki występuje jest błąd dotyczący customowych atrybutów elementów HTML,
+      ale ze względu na specyfikę rozwiązania błąd ten został pominięty.
+    </p>
+    <p class="about-p">
+      W aplikacji wykorzystano kaskadowe style, pisane głównie przy użyciu składni SCSS - pliki tego typu są interpretowane przez bibliotekę "Sass" i sprowadzane do standardowego formatu CSS.
+      Poprawność styli również można zweryfikować przy użyciu <a href="https://jigsaw.w3.org/css-validator/">walidatora CSS</a>. Tutaj zignorowano ostrzeżenia na poziomie "warning", ponieważ dotyczyły głównie rozszerzeń typowych dla przeglądarek,
+      braku cudzysłowów w nazwach czcionek i kilku innych mało istotnych kwestii.
+    </p>
+    <p class="about-p">
+      Strona jest poprawnie wyświetlana w nowych przeglądarkach typu Chrome, Firefox, Opera. Rodzaj i wersja przeglądarki nie mają wpływu na funkcjonowanie strony oraz nie zakłócają jej poprawnego wyświetlania.
+    </p>
+    <p class="about-p">
+      Podczas tworzenia aplikacji zadbano o podstawowe zasady dostępności. Co prawda przy takiej skali nie miało większego sensu stosowanie atrybutów i ról z grupy ARIA, jednak poruszanie się po stronie i podstawowa obsługa są możliwe
+      nawet bez możliwości wyświetlenia obrazów lub w trybie monochromatycznym. Obrazki zostały doposażone w alternatywne podpisy, z wyjątkiem obrazów wplecionych w treści przepisów, ponieważ kod HTML w tym zakresie jest generowany przez edytor TinyMCE w widoku edycji przepisu.
+    </p>
+    <p class="about-p">
+      Zastosowane technologie wymienione nieco wyżej na niniejszej podstronie stanowią znaczną podstawę do uznania aplikacji jako zgodnej z wymaganiami technologicznymi. Zastosowano tutaj nie tylko skrypty po stronie klienta na których bazuje cała aplikacja (logika pisana w TypeScript), ale także skrypty po stronie serwera (C#),
+      dostęp do bazy danych (MSSQL), Web Service w postaci REST API. Cała strona jest także zabezpieczona protokołem SSL - dla części frontendowej certyfikat dostarczany przez Google, dla części backendowej tymczasowy certyfikat z Let's Encrypt (ważny trzy miesiące).
+    </p>
+    <p class="about-p">
+      Szata graficzna strony jest czytelna oraz przejrzysta - jest bowiem wolna od nadmiernej pstrokatości,
+    </p>
   </mat-card-content>
 </mat-card>
 

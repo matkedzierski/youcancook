@@ -1,7 +1,7 @@
 <mat-card class="recipe-card mat-elevation-z7" [routerLink]="['/recipes/view', recipe?.id]">
   <mat-card-header>
     <mat-card-title>{{recipe?.title}}</mat-card-title>
-    <mat-card-subtitle>{{getCategoryName(recipe?.category)}}</mat-card-subtitle>
+    <mat-card-subtitle style="font-size: 1.25em;">{{getCategoryName(recipe?.category)}}</mat-card-subtitle>
     <div class="recipe-header-icons">
       <mat-chip-list>
         <mat-chip>
@@ -13,13 +13,13 @@
         <mat-chip>
           <span class="recipe-detail-icon">
             <mat-icon>timer</mat-icon>
-            {{recipe?.preparationTimeMinutes}} min.
+            <span>{{recipe?.preparationTimeMinutes}} min.</span>
           </span>
         </mat-chip>
         <mat-chip>
           <span class="recipe-detail-icon">
             <mat-icon>person</mat-icon>
-            {{recipe?.portions}} os.
+            <span>{{recipe?.portions}} os.</span>
           </span>
         </mat-chip>
         <mat-chip (click)="addFavourite($event)" class="clickable-chip">

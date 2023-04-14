@@ -43,6 +43,7 @@ import { ImagePickerComponent } from './components/image-picker/image-picker.com
 import { PickedImageComponent } from './components/image-picker/picked-image/picked-image.component';
 import { PickImageComponent } from './components/image-picker/pick-image/pick-image.component';
 import {PhotoGalleryModule} from "@twogate/ngx-photo-gallery";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -67,47 +68,48 @@ import {PhotoGalleryModule} from "@twogate/ngx-photo-gallery";
     PickedImageComponent,
     PickImageComponent,
   ],
-  imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
-    FormsModule,
-    AuthModule.forRoot({
-      domain: 'youcookit.eu.auth0.com',
-      clientId: 'spieE5Jl78sHu9zwMlzZDC00fksUUnTv',
-      authorizationParams: {
-        redirect_uri: window.location.origin,
-      },
-      httpInterceptor: {
-        allowedList: [{
-          uri: `${environment.backendUrl}/*`,
-          allowAnonymous: true,
-          tokenOptions: {
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        AuthModule.forRoot({
+            domain: 'youcookit.eu.auth0.com',
+            clientId: 'spieE5Jl78sHu9zwMlzZDC00fksUUnTv',
             authorizationParams: {
-              audience: "https://youcancook/",
-              scope: 'recipes:read',
-              redirect_uri: window.location.origin
-            }
-          }
-        }],
-      },
-    }),
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatChipsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    EditorModule,
-    PhotoGalleryModule
-  ],
+                redirect_uri: window.location.origin,
+            },
+            httpInterceptor: {
+                allowedList: [{
+                    uri: `${environment.backendUrl}/*`,
+                    allowAnonymous: true,
+                    tokenOptions: {
+                        authorizationParams: {
+                            audience: "https://youcancook/",
+                            scope: 'recipes:read',
+                            redirect_uri: window.location.origin
+                        }
+                    }
+                }],
+            },
+        }),
+        RouterModule.forRoot(routes),
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatChipsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        EditorModule,
+        PhotoGalleryModule,
+        MatTabsModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -16,6 +16,11 @@
     background-position: -94px -44px !important;
   }
 
+
+  .pswp__button:not(.pswp__button--zoom, pswp__button--close) {
+    background-image: none !important;
+  }
+
   .pswp__button--arrow--right {
     margin-right: 15px !important;
   }
@@ -48,4 +53,29 @@
 
 .clearfix {
   clear: both;
+}
+
+
+.recipe-header-icons {
+  margin-left: auto;
+}
+
+.recipe-detail-icon.no-margin {
+  mat-icon {
+    margin-right: 0 !important;
+  }
+
+  padding: 0
+}
+
+.recipe-detail-icon {
+  mat-icon {
+    vertical-align: middle;
+    padding-bottom: 1px;
+    margin-right: 5px;
+  }
+}
+
+mat-chip-list {
+  display: inline-block;
 }
