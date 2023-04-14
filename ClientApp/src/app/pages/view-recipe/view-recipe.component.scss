@@ -2,26 +2,40 @@
   #content > h3 {
     font-weight: 600;
   }
+
   .ng-image-slider, .ng-image-slider .ng-image-slider-container .main {
     height: 100px !important;
     margin: auto;
   }
 
+  .pswp__button--arrow--left:before {
+    background-position: -137px -44px !important;
+  }
+
+  .pswp__button--arrow--right:before {
+    background-position: -94px -44px !important;
+  }
+
+  .pswp__button--arrow--right {
+    margin-right: 15px !important;
+  }
 }
 
-.picker-card{
+.picker-card {
   float: left;
   //width: 160px;
   height: 90px;
   padding: 0;
   margin-right: 5px;
   text-align: center;
+
   img {
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
   }
 }
+
 .picker-container {
   padding-bottom: 24.5px !important;
 }

@@ -28,7 +28,7 @@
               {
                 "glob": "**/*.@(svg|png|gif)",
                 "input": "./node_modules/photoswipe/src/css/default-skin",
-                "output": "/assets/media/"
+                "output": "."
               },
               {
                 "glob": "**/*",
@@ -113,7 +113,7 @@
               {
                 "glob": "**/*.@(svg|png|gif)",
                 "input": "./node_modules/photoswipe/src/css/default-skin",
-                "output": "/assets/media/"
+                "output": "."
               }
             ],
             "styles": [
