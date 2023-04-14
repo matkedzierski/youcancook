@@ -6,11 +6,11 @@ export class Recipe {
   id?: number;
   title?: string;
   isFavourite?: boolean;
-  category?: Category;
+  category: Category = Category.MAIN_DISHES;
   difficulty?: Difficulty = Difficulty.Hard;
   content?: string;
   shortDescription?: string;
-  preparationTimeMinutes?: number = 10;
-  portions?: number = 4;
+  preparationTimeMinutes?: number;
+  portions?: number;
   images: RecipeImage[] = [];
 }

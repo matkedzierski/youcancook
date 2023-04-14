@@ -13,6 +13,13 @@ public class Recipe
 
     public List<string> Ingredients { get; set; } = new();
 
+    public string? Category { get; set; }
+    
+    public string? Difficulty { get; set; }
+    
+    public int? PreparationTimeMinutes { get; set; }
+    public int? Portions { get; set; }
+    
     public string? ShortDescription { get; set; }
 
     public string? Content { get; set; }

@@ -1,11 +1,10 @@
-import {AfterViewInit, Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Recipe} from "../../model/recipe";
 import {Difficulty} from "../../model/difficulty.enum";
 import {RecipeService} from "../../services/recipe.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 import {SnackService} from "../../services/snack.service";
-import {RecipeImage} from "../../model/recipe-image";
 import {Category} from "../../model/category.enum";
 
 @Component({
@@ -23,13 +22,15 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
     hard: "Trudny"
   }
 
-  categoryNames: Map<Category, string> = new Map([
-    [Category.MAIN_DISHES, "Dania główne"],
-    [Category.SOUPS, "Zupy"],
-    [Category.DESSERTS, "Desery"],
-    [Category.PASTA, "Makarony"],
-    [Category.PIZZA, "Pizza"],
-    [Category.SALADS, "Sałatki"]
+  categories = Object.values(Category);
+
+  categoryNames: Map<string, string> = new Map([
+    [Category.MAIN_DISHES.valueOf(), "Dania główne"],
+    [Category.SOUPS.valueOf(), "Zupy"],
+    [Category.DESSERTS.valueOf(), "Desery"],
+    [Category.PASTA.valueOf(), "Makarony"],
+    [Category.PIZZA.valueOf(), "Pizza"],
+    [Category.SALADS.valueOf(), "Sałatki"]
   ]);
 
   constructor(public recipeService: RecipeService,
@@ -40,7 +41,6 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild('autosize') autosize?: CdkTextareaAutosize;
-
   ngAfterViewInit() {
     this._ngZone.onStable.subscribe(() => this.autosize?.resizeToFitContent(true));
   }

@@ -1,16 +1,17 @@
 <h1 class="header bold" *ngIf="!recipe.id">Dodaj przepis</h1>
 <h1 class="header bold" *ngIf="recipe.id">Edytuj przepis</h1>
-<div class="add-form">
+<form class="add-form" #recipeForm="ngForm">
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Nazwa</mat-label>
-    <input matInput [(ngModel)]="recipe.title"/>
+    <input matInput [(ngModel)]="recipe.title" required #name="ngModel" name="name"/>
+    <mat-error *ngIf="name.invalid">Nazwa jest wymagana</mat-error>
   </mat-form-field>
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Kategoria</mat-label>
     <mat-select [(ngModel)]="recipe.category" name="category">
-      <mat-option *ngFor="let category of categoryNames.keys()" [value]="category">
+      <mat-option *ngFor="let category of categories" [value]="category">
         {{categoryNames.get(category)}}
       </mat-option>
     </mat-select>
@@ -18,14 +19,14 @@
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Krótki opis</mat-label>
-    <textarea matInput
+    <textarea matInput required
               [(ngModel)]="recipe.shortDescription"
               cdkTextareaAutosize
+              name="shortDesc"
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="2"
               cdkAutosizeMaxRows="5"></textarea>
   </mat-form-field>
-
   <app-image-picker [(images)]="recipe.images"></app-image-picker>
 
   <mat-form-field class="field-full" appearance="outline">
@@ -39,16 +40,18 @@
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Czas przygotowania (min.)</mat-label>
-    <input matInput>
+    <input matInput name="prepTime" [(ngModel)]="recipe.preparationTimeMinutes" required #prepTime="ngModel">
+    <mat-error *ngIf="prepTime.invalid">Czas przygotowania jest wymagany</mat-error>
   </mat-form-field>
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Liczba porcji</mat-label>
-    <input matInput>
+    <input matInput [(ngModel)]="recipe.portions" name="portions" required #portions="ngModel">
+    <mat-error *ngIf="portions.invalid">Liczba porcji jest wymagana</mat-error>
   </mat-form-field>
 
-  <app-recipe-editor [recipe]="recipe" [(ngModel)]="recipe.content"></app-recipe-editor>
+  <app-recipe-editor [recipe]="recipe" [(ngModel)]="recipe.content" name="content"></app-recipe-editor>
 
 
-  <button mat-raised-button color="primary" (click)="saveRecipe(recipe)">Zapisz przepis</button>
-</div>
+  <button mat-raised-button color="primary" (click)="saveRecipe(recipe)" [disabled]="!recipeForm.form.valid">Zapisz przepis</button>
+</form>

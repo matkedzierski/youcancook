@@ -4,5 +4,5 @@
   DESSERTS = "desserts",
   PIZZA = "pizza",
   PASTA = "pasta",
-  "SALADS" = "salads"
+  SALADS = "salads"
 }
