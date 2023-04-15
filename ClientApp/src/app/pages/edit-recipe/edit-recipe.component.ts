@@ -80,6 +80,6 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
 
   validateInteger(e: any) {
     const charCode = e.which ? e.which : e.keyCode;
-    return charCode != 189 && charCode != 188;
+    return charCode >= 188 && charCode <= 190;
   }
 }
