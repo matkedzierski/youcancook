@@ -31,7 +31,7 @@
     </div>
   </mat-card-header>
   <mat-card-content>
-    <img class="recipe-img" mat-card-lg-image [src]="getImageUrl(recipe)" alt="">
+    <img class="recipe-img" mat-card-lg-image [src]="getImageUrl(recipe)" [alt]="recipe?.title">
     <span class="recipe-description">{{recipe?.shortDescription}}</span>
   </mat-card-content>
 </mat-card>

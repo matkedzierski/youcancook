@@ -28,5 +28,13 @@ export class ImagePickerComponent implements OnInit {
   deleteImage(image: RecipeImage) {
     this.images = this.images?.filter(i => i != image);
     this.imagesChange.next(this.images);
+    this.reorderImages();
+  }
+
+  reorderImages(){
+    this.images.sort((a,b) => a.order - b.order);
+    for(let i = 0; i < this.images.length; i++){
+      this.images[i].order = i;
+    }
   }
 }

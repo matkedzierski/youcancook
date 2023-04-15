@@ -43,6 +43,7 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild('autosize') autosize?: CdkTextareaAutosize;
+
   ngAfterViewInit() {
     this._ngZone.onStable.subscribe(() => this.autosize?.resizeToFitContent(true));
   }
@@ -75,5 +76,10 @@ export class EditRecipeComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  validateInteger(e: any) {
+    const charCode = e.which ? e.which : e.keyCode;
+    return charCode != 189 && charCode != 188;
   }
 }

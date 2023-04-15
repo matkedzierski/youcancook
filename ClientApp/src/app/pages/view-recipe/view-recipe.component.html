@@ -17,7 +17,7 @@
       <mat-chip>
           <span class="recipe-detail-icon">
             <mat-icon>speed</mat-icon>
-            <app-level-badge [level]="recipe?.difficulty"></app-level-badge>
+            <app-level-badge [level]="recipe.difficulty"></app-level-badge>
           </span>
       </mat-chip>
     </mat-chip-list><br><br>
@@ -26,7 +26,7 @@
       <mat-chip>
           <span class="recipe-detail-icon">
             <mat-icon>timer</mat-icon>
-            <span>{{recipe?.preparationTimeMinutes}} min.</span>
+            <span>{{recipe.preparationTimeMinutes}} min.</span>
           </span>
       </mat-chip>
     </mat-chip-list><br><br>
@@ -35,7 +35,7 @@
       <mat-chip>
           <span class="recipe-detail-icon">
             <mat-icon>person</mat-icon>
-            <span>{{recipe?.portions}} os.</span>
+            <span>{{recipe.portions}} os.</span>
           </span>
       </mat-chip>
     </mat-chip-list><br>
@@ -48,7 +48,7 @@
   <div class="images" id="gallery" [photoGalleryGroup]="{arrowEl: true}">
     <div class="thumbnails">
       <mat-card class="picker-card images-item" *ngFor="let im of images" [photoGallery]="im.image">
-        <img alt="img1" [src]="im.thumbImage" />
+        <img [alt]="'Zdjęcie ' + im.order" [src]="im.thumbImage" />
       </mat-card>
       <div class="clearfix"></div>
     </div>

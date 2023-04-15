@@ -11,7 +11,7 @@ import {Category} from "../../model/category.enum";
 })
 export class ViewRecipeComponent implements OnInit {
   recipe: Recipe = new Recipe();
-  images:{image: string, thumbImage: string}[] = [];
+  images:{image: string, thumbImage: string, order: number}[] = [];
 
   categoryNames: Map<Category, string> = new Map([
     [Category.MAIN_DISHES, "Dania główne"],
@@ -32,7 +32,7 @@ export class ViewRecipeComponent implements OnInit {
       if(this.recipe && this.recipe.images){
         this.recipe.images.forEach(image => {
           let url = this.imageService.getImageUrlOrContent(image);
-          this.images.push({image: url, thumbImage: url})
+          this.images.push({image: url, thumbImage: url, order: image.order})
         });
         //new ImageItem({src: this.imageService.getImageUrlOrContent(i), type: ''});
       }

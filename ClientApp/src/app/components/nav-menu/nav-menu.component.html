@@ -51,7 +51,7 @@
   <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
     <a class="nav-link profile-link" *ngIf="auth.user$ | async as user">
       <img [src]="user.picture" class="user-pic" alt="Awatar użytkownika"/>
-      {{ user.nickname ? user.nickname : user.name }}
+      {{ user.username ? user.username : user.name }}
     </a>
     <mat-divider vertical="true"></mat-divider>
 

@@ -1,4 +1,4 @@
 <mat-card class="picker-card">
   <button (click)="deleteImage(image)" class="picked-image-button delete" mat-mini-fab color="warn"><mat-icon>close</mat-icon></button>
-  <img [src]="getImageUrl(image)" alt=""/>
+  <img [src]="getImageUrl(image)" [alt]="'Zdjęcie ' + image?.order"/>
 </mat-card>

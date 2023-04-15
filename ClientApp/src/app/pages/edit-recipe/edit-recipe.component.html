@@ -40,13 +40,13 @@
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Czas przygotowania (min.)</mat-label>
-    <input matInput name="prepTime" [(ngModel)]="recipe.preparationTimeMinutes" required #prepTime="ngModel">
+    <input matInput name="prepTime" [(ngModel)]="recipe.preparationTimeMinutes" required type="number" (keydown)="validateInteger($event)" #prepTime="ngModel">
     <mat-error *ngIf="prepTime.invalid">Czas przygotowania jest wymagany</mat-error>
   </mat-form-field>
 
   <mat-form-field class="field-full" appearance="outline">
     <mat-label>Liczba porcji</mat-label>
-    <input matInput [(ngModel)]="recipe.portions" name="portions" required #portions="ngModel">
+    <input matInput [(ngModel)]="recipe.portions" name="portions" required type="number" (keydown)="validateInteger($event)" #portions="ngModel">
     <mat-error *ngIf="portions.invalid">Liczba porcji jest wymagana</mat-error>
   </mat-form-field>
 
